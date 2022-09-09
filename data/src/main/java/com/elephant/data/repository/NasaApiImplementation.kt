@@ -3,6 +3,7 @@ package com.elephant.data.repository
 import com.elephant.data.retrofit.NasaApi
 import com.elephant.domain.model.CollectionLink
 import com.elephant.domain.model.Item
+import com.elephant.domain.model.ItemLink
 import com.elephant.domain.model.NasaServerModel
 import com.elephant.domain.repositories.SearchRepository
 import com.elephant.domain.wrappers.CallbackNetwork
@@ -37,9 +38,14 @@ class NasaApiImplementation : SearchRepository {
                     CallbackNetwork.Success(
                         NasaServerModel(
                             response.body()!!.collection.href,
-                            response.body()!!.collection.items.map {
+                            response.body()!!.collection.items.map { item ->
                                 Item(
-                                    it.href
+                                    href = item.href,
+                                    links = item.links.map {
+                                        ItemLink(
+                                            it.href
+                                        )
+                                    }
                                 )
                             },
                             response.body()!!.collection.links.map {
