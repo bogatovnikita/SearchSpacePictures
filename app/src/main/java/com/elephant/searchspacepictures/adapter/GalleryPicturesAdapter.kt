@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.elephant.searchspacepictures.R
 import com.elephant.searchspacepictures.databinding.ItemPictureBinding
 import com.elephant.searchspacepictures.models.ResponseUrlPictures

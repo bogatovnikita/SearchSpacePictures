@@ -3,7 +3,8 @@ package com.elephant.domain.model
 data class NasaServerModel(
     val href: String,
     val items: List<Item>,
-    val links: List<CollectionLink>
+    val links: List<CollectionLink>,
+    val metadata: Long,
 )
 
 data class Item(

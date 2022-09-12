@@ -26,13 +26,16 @@ class NasaApiImplementation : SearchRepository {
         .connectTimeout(100, TimeUnit.SECONDS)
         .readTimeout(100, TimeUnit.SECONDS).build()
 
-    override suspend fun getSearchQueryJSON(search: String): CallbackNetwork<NasaServerModel, String> =
+    override suspend fun getSearchQueryJSON(
+        search: String,
+        page: Int
+    ): CallbackNetwork<NasaServerModel, String> =
         withContext(Dispatchers.IO) {
             try {
                 val response = getRetrofitImplementationForSearch().getQuerySearch(
                     search = search,
                     type = "image",
-                    page = 1
+                    page = page
                 )
                 if (response.isSuccessful && response.body() != null) {
                     CallbackNetwork.Success(
@@ -54,6 +57,9 @@ class NasaApiImplementation : SearchRepository {
                                     prompt = it.prompt,
                                     href = it.href
                                 )
+                            },
+                            response.body()!!.collection.metadata.let {
+                                it.totalHits
                             }
                         )
                     )

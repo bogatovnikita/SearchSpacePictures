@@ -20,19 +20,21 @@ class MainScreenViewModel : ViewModel() {
     private val currentState: MainScreenState
         get() = state.value!!
 
-    fun getPictures(choiceSearch: String) {
+    fun getPictures(choiceSearch: String, page: Int) {
+        _state.value = currentState.copy(loaded = false, notResponse = false)
         viewModelScope.launch {
-            getSearchQueryJSON(choiceSearch)
+            getSearchQueryJSON(choiceSearch, page)
         }
     }
 
-    private suspend fun getSearchQueryJSON(choiceSearch: String) {
-        getSearchQueryJSON.invoke(choiceSearch).collect { result ->
+    private suspend fun getSearchQueryJSON(choiceSearch: String, page: Int) {
+        getSearchQueryJSON.invoke(choiceSearch, page).collect { result ->
             when (result) {
                 is CaseResult.Success -> {
                     if (result.response.items.isNotEmpty()) {
-                        _state.value = currentState.copy(loaded = true,
-                            page = 1,
+                        _state.value = currentState.copy(
+                            loaded = true,
+                            page = page,
                             listResponsePicture = result.response.items.map { item ->
                                 ResponseUrlPictures(
                                     previewImage = item.links.first().href,
@@ -41,13 +43,32 @@ class MainScreenViewModel : ViewModel() {
                                         ""
                                     )
                                 )
-                            })
+                            }, totalPictures = result.response.metadata
+                        )
                     }
+                }
+                is CaseResult.Failure -> {
+                    _state.value = currentState.copy(notResponse = true)
                 }
                 else -> {}
             }
         }
     }
+
+    fun upPage(choiceSearch: String) {
+        if (currentState.totalPictures / 100 > currentState.page) {
+            _state.value = currentState.copy(page = currentState.page + 1)
+            getPictures(choiceSearch, currentState.page)
+        }
+    }
+
+    fun downPage(choiceSearch: String) {
+        if (currentState.page > 1) {
+            _state.value = currentState.copy(page = currentState.page - 1)
+            getPictures(choiceSearch, currentState.page)
+        }
+    }
+
 
 //    private fun getList(list: List<ResponseImages>): Flow<ResponseImages> = flow {
 //         currentState.listResponseImages.map { responseImage ->

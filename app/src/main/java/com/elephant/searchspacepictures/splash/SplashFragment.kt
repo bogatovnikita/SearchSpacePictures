@@ -19,6 +19,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     }
 
     private fun navigateTo() {
-        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainScreenFragment2())
+        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainScreenFragment())
     }
 }

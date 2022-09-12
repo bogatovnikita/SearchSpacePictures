@@ -11,7 +11,7 @@
         android:label="SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashFragment_to_mainScreenFragment2"
+            android:id="@+id/action_splashFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment"
             app:popUpTo="@id/nav_graph" />
     </fragment>
@@ -19,5 +19,19 @@
         android:id="@+id/mainScreenFragment"
         android:name="com.elephant.searchspacepictures.main_screen.MainScreenFragment"
         android:label="MainScreenFragment"
-        tools:layout="@layout/fragment_main_screen"/>
+        tools:layout="@layout/fragment_main_screen">
+        <action
+            android:id="@+id/action_mainScreenFragment_to_viewPagerScreenFragment"
+            app:destination="@id/viewPagerScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerScreenFragment"
+        tools:layout="@layout/fragment_picture_screen"
+        android:name="com.elephant.searchspacepictures.pictureScreen.PictureScreenFragment"
+        android:label="ViewPagerScreenFragment" >
+        <argument
+            android:name="list_pictures"
+            app:argType="com.elephant.searchspacepictures.models.ResponseUrlPictures"
+            app:nullable="true" />
+    </fragment>
 </navigation>
