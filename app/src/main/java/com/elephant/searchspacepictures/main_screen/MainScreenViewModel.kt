@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.elephant.data.repository.NasaApiImplementation
 import com.elephant.domain.usecase.CaseResult
 import com.elephant.domain.usecase.GetSearchQueryJSON
-import com.elephant.searchspacepictures.models.ResponseImages
+import com.elephant.searchspacepictures.models.ResponseUrlPictures
 import kotlinx.coroutines.launch
 
 class MainScreenViewModel : ViewModel() {
@@ -33,8 +33,8 @@ class MainScreenViewModel : ViewModel() {
                     if (result.response.items.isNotEmpty()) {
                         _state.value = currentState.copy(loaded = true,
                             page = 1,
-                            result.response.items.map { item ->
-                                ResponseImages(
+                            listResponsePicture = result.response.items.map { item ->
+                                ResponseUrlPictures(
                                     previewImage = item.links.first().href,
                                     originLinkForList = item.href.replace(
                                         "https://images-assets.nasa.gov/",

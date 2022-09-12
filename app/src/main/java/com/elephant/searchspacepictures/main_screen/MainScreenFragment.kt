@@ -31,9 +31,9 @@ class MainScreenFragment :
         viewModel.state.observe(viewLifecycleOwner) { state ->
             if (state.loaded) {
                 binding.progressBar.isVisible = false
-                binding.containerRecyclerView.isVisible = true
+                binding.recyclerViewGroup.isVisible = true
             }
-            adapter.pictures = state.listResponseImages
+            adapter.pictures = state.listResponsePicture
         }
     }
 

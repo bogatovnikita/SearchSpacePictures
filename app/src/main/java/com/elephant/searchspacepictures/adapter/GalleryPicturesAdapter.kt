@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.elephant.searchspacepictures.R
 import com.elephant.searchspacepictures.databinding.ItemPictureBinding
-import com.elephant.searchspacepictures.models.ResponseImages
+import com.elephant.searchspacepictures.models.ResponseUrlPictures
 
 class PicturesDiffCallback(
-    private val oldList: List<ResponseImages>,
-    private val newList: List<ResponseImages>
+    private val oldList: List<ResponseUrlPictures>,
+    private val newList: List<ResponseUrlPictures>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
@@ -30,10 +30,10 @@ class PicturesDiffCallback(
     }
 }
 
-class GalleryPicturesAdapter(private val onPictureClickListener: (Int) -> Unit) :
+class GalleryPicturesAdapter(private val onPictureClickListener: (ResponseUrlPictures) -> Unit) :
     RecyclerView.Adapter<GalleryPicturesAdapter.PicturesViewHolder>() {
 
-    var pictures: List<ResponseImages> = mutableListOf()
+    var pictures: List<ResponseUrlPictures> = mutableListOf()
         set(value) {
             val diffCallback = PicturesDiffCallback(field, value)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -41,22 +41,37 @@ class GalleryPicturesAdapter(private val onPictureClickListener: (Int) -> Unit) 
             diffResult.dispatchUpdatesTo(this)
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemPictureBinding.inflate(inflater, parent, false)
-        return PicturesViewHolder(binding)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesViewHolder =
+        PicturesViewHolder(parent) {
+            onPictureClickListener(pictures[it])
+        }
 
     override fun onBindViewHolder(holder: PicturesViewHolder, position: Int) {
-        val picture = pictures[position].previewImage
-        Glide.with(holder.itemView.context)
-            .load(picture)
-            .placeholder(R.drawable.ic_baseline_image_24)
-            .into(holder.binding.picture)
+        val item = pictures[position]
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int = pictures.size
 
-    class PicturesViewHolder(val binding: ItemPictureBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class PicturesViewHolder(parent: ViewGroup, private val clickAtPosition: (Int) -> Unit) :
+        RecyclerView.ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_picture, parent, false)
+        ) {
+        private val binding = ItemPictureBinding.bind(itemView)
+
+        init {
+            itemView.setOnClickListener {
+                clickAtPosition(adapterPosition)
+            }
+        }
+
+        fun bind(item: ResponseUrlPictures) {
+            Glide.with(itemView.context)
+                .load(item.previewImage)
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .into(binding.picture)
+        }
+    }
+
+
 }
