@@ -1,7 +1,7 @@
 package com.elephant.searchspacepictures.host
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.elephant.searchspacepictures.R
 
 class MainActivity : AppCompatActivity() {

@@ -1,6 +1,5 @@
 package com.elephant.searchspacepictures.main_screen
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.View

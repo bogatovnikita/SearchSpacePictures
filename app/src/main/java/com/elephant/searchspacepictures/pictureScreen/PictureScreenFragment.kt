@@ -83,6 +83,7 @@ class PictureScreenFragment :
                             binding.progressBar.isVisible = false
                             initToolbar()
                         }
+
                         override fun onLoadCleared(placeholder: Drawable?) {}
                     })
             }

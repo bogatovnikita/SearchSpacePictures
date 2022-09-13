@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.elephant.searchspacepictures.R
 import com.elephant.searchspacepictures.base.BaseFragment
 import com.elephant.searchspacepictures.databinding.FragmentSplashBinding
-import kotlinx.coroutines.delay
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
 

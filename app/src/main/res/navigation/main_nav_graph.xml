@@ -26,9 +26,9 @@
     </fragment>
     <fragment
         android:id="@+id/pictureScreenFragment"
-        tools:layout="@layout/fragment_picture_screen"
         android:name="com.elephant.searchspacepictures.pictureScreen.PictureScreenFragment"
-        android:label="ViewPagerScreenFragment" >
+        android:label="ViewPagerScreenFragment"
+        tools:layout="@layout/fragment_picture_screen">
         <argument
             android:name="list_pictures"
             app:argType="com.elephant.searchspacepictures.models.ResponseUrlPictures"

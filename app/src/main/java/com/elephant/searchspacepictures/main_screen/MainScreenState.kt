@@ -7,5 +7,5 @@ data class MainScreenState(
     val page: Int = 1,
     val totalPictures: Long = 0L,
     val listResponsePicture: List<ResponseUrlPictures> = emptyList(),
-    val notResponse:Boolean = false
+    val notResponse: Boolean = false
 )

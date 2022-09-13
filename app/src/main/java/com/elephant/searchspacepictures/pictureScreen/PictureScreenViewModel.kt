@@ -2,13 +2,11 @@ package com.elephant.searchspacepictures.pictureScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.elephant.data.repository.NasaApiImplementation
 import com.elephant.domain.usecase.CaseResult
 import com.elephant.domain.usecase.GetSearchQueryPictures
 import com.elephant.searchspacepictures.models.ResponseUrlPictures
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PictureScreenViewModel(private val picture: ResponseUrlPictures) : ViewModel() {
