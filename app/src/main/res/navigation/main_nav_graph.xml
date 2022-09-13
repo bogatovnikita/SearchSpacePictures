@@ -21,11 +21,11 @@
         android:label="MainScreenFragment"
         tools:layout="@layout/fragment_main_screen">
         <action
-            android:id="@+id/action_mainScreenFragment_to_viewPagerScreenFragment"
-            app:destination="@id/viewPagerScreenFragment" />
+            android:id="@+id/action_mainScreenFragment_to_pictureScreenFragment"
+            app:destination="@id/pictureScreenFragment" />
     </fragment>
     <fragment
-        android:id="@+id/viewPagerScreenFragment"
+        android:id="@+id/pictureScreenFragment"
         tools:layout="@layout/fragment_picture_screen"
         android:name="com.elephant.searchspacepictures.pictureScreen.PictureScreenFragment"
         android:label="ViewPagerScreenFragment" >

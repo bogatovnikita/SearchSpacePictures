@@ -34,6 +34,7 @@ class MainScreenFragment :
 
     private fun initClickSearch() {
         binding.textField.setEndIconOnClickListener {
+            if (binding.textInput.text!!.isEmpty()) return@setEndIconOnClickListener
             closeKeyboard(it)
             binding.progressBar.isVisible = true
             viewModel.getPictures(binding.textInput.text.toString(), 1)
@@ -97,13 +98,13 @@ class MainScreenFragment :
             navigateTo(it)
         }
         binding.recyclerView.layoutManager =
-            GridLayoutManager(requireActivity(), 2, GridLayoutManager.VERTICAL, false)
+            GridLayoutManager(requireActivity(), 3, GridLayoutManager.VERTICAL, false)
         binding.recyclerView.adapter = adapter
     }
 
     private fun navigateTo(listPictures: ResponseUrlPictures) {
         findNavController().navigate(
-            MainScreenFragmentDirections.actionMainScreenFragmentToViewPagerScreenFragment(
+            MainScreenFragmentDirections.actionMainScreenFragmentToPictureScreenFragment(
                 listPictures
             )
         )

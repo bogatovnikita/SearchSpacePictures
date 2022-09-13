@@ -68,26 +68,4 @@ class MainScreenViewModel : ViewModel() {
             getPictures(choiceSearch, currentState.page)
         }
     }
-
-
-//    private fun getList(list: List<ResponseImages>): Flow<ResponseImages> = flow {
-//         currentState.listResponseImages.map { responseImage ->
-//            getSearchQueryPictures.invoke(responseImage.originLinkForList)
-//                .collect { result ->
-//                    when (result) {
-//                        is CaseResult.Success -> {
-//                            if (result.response.isNotEmpty()) {
-//                                emit(ResponseImages(
-//                                    responseImage.previewImage,
-//                                    responseImage.originLinkForList,
-//                                    result.response.first {
-//                                        regexOrig.containsMatchIn(it)
-//                                    }))
-//                            }
-//                        }
-//                        else -> {}
-//                    }
-//                }
-//        }
-//    }
 }
