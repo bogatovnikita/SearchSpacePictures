@@ -10,7 +10,7 @@
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         tools:src="@drawable/image_tools_thumb" />
 
 </LinearLayout>

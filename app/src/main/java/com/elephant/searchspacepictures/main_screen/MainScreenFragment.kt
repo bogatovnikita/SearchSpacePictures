@@ -2,6 +2,7 @@ package com.elephant.searchspacepictures.main_screen
 
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -38,6 +39,18 @@ class MainScreenFragment :
             binding.progressBar.isVisible = true
             viewModel.getPictures(binding.textInput.text.toString(), 1)
         }
+        binding!!.textInput.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(p0: View, p1: Int, p2: KeyEvent?): Boolean {
+                if(p1 == KeyEvent.KEYCODE_ENTER){
+                    closeKeyboard(p0)
+                    binding!!.progressBar.isVisible = true
+                    viewModel.getPictures(binding!!.textInput.text.toString(), 1)
+                    return true
+                }
+                return false
+            }
+
+        })
     }
 
     private fun closeKeyboard(it: View) {
